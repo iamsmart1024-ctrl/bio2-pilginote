@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생명과학Ⅱ 시험대비 필기노트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700;900&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2128;
+    --ink-soft:#3a4150;
+    --paper:#fbfaf6;
+    --line:#d8d4c6;
+    --line-soft:#e7e3d6;
+    /* unit accent colors */
+    --u1:#2f7d6e;   /* 광합성 - chlorophyll teal-green */
+    --u1-bg:#eef6f3;
+    --u2:#7d4a9e;   /* 유전물질 - DNA violet */
+    --u2-bg:#f3eef8;
+    --u3:#b06a2c;   /* 생명공학기술 - amber */
+    --u3-bg:#f8f1e8;
+    --u4:#b03a4a;   /* 활용 - crimson */
+    --u4-bg:#f8edee;
+    --exam:#2a4a7c; /* 문제 - exam blue */
+    --exam-bg:#eef2f8;
+    --hl:#fff3b0;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{margin:0;padding:0;}
+
+  body{
+    font-family:'Noto Serif KR', serif;
+    color:var(--ink);
+    background:#54564f;
+    font-weight:400;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ============ PAGE / A4 ============ */
+  .page{
+    width:210mm;
+    min-height:297mm;
+    background:var(--paper);
+    margin:8mm auto;
+    padding:16mm 15mm 14mm 15mm;
+    position:relative;
+    box-shadow:0 2px 18px rgba(0,0,0,.32);
+    overflow:hidden;
+  }
+
+  @media print{
+    body{background:#fff;}
+    .page{
+      margin:0;
+      box-shadow:none;
+      width:auto;
+      min-height:auto;
+      padding:14mm 13mm;
+      page-break-after:always;
+    }
+    .page:last-child{page-break-after:auto;}
+    .no-print{display:none !important;}
+  }
+
+  /* avoid breaking inside blocks across pages */
+  .card, .deftable, .cmp, .qbox, .seq, .keyrow, .note-block, .figbox,
+  .subsec, .term-line, .qopts, .ans-row{
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
+
+  /* ============ COVER ============ */
+  .cover{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    min-height:265mm;
+  }
+  .cover-eyebrow{
+    font-family:'Noto Sans KR',sans-serif;
+    font-size:11.5pt;
+    letter-spacing:.42em;
+    color:var(--ink-soft);
+    font-weight:500;
+    padding-left:.4em;
+  }
+  .cover-rule{
+    height:2px;background:var(--ink);margin:14px 0 26px;width:100%;
+  }
+  .cover h1{
+    font-size:46pt;
+    font-weight:900;
+    line-height:1.12;
+    margin:0 0 6px;
+    letter-spacing:-.01em;
+  }
+  .cover h1 .sub{display:block;font-size:23pt;font-weight:600;color:var(--ink-soft);margin-top:14px;letter-spacing:.01em;}
+  .cover-meta{
+    margin-top:40px;
+    font-family:'Noto Sans KR',sans-serif;
+    font-size:10.5pt;
+    color:var(--ink-soft);
+    line-height:2.0;
+  }
+  .cover-meta b{font-weight:700;color:var(--ink);}
+  .cover-units{
+    margin-top:34px;
+    display:grid;
+    gap:0;
+    border-top:1px solid var(--line);
+  }
+  .cover-unit{
+    display:flex;align-items:baseline;gap:16px;
+    padding:13px 4px;
+    border-bottom:1px solid var(--line);
+  }
+  .cover-unit .cu-no{
+    font-family:'Noto Sans KR',sans-serif;
+    font-weight:700;font-size:11pt;
+    width:42px;flex:none;
+    color:#fff;text-align:center;border-radius:3px;padding:3px 0;
+  }
+  .cover-unit .cu-title{font-size:14pt;font-weight:600;}
+  .cover-unit .cu-area{margin-left:auto;font-family:'Noto Sans KR',sans-serif;font-size:9.5pt;color:var(--ink-soft);letter-spacing:.04em;}
+
+  /* ============ RUNNING HEADER ============ */
+  .runhead{
+    position:absolute;top:7mm;left:15mm;right:15mm;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'Noto Sans KR',sans-serif;
+    font-size:8pt;color:#9a958a;letter-spacing:.06em;
+    padding-bottom:4px;border-bottom:1px solid var(--line-soft);
+  }
+  .runhead .rh-tag{font-weight:700;}
+
+  .pagenum{
+    position:absolute;bottom:7mm;left:0;right:0;text-align:center;
+    font-family:'Noto Sans KR',sans-serif;font-size:8.5pt;color:#a9a499;
+  }
+
+  /* ============ UNIT HEADER ============ */
+  .unit-head{
+    display:flex;align-items:flex-start;gap:14px;
+    margin:2px 0 18px;
+    padding-bottom:12px;
+  }
+  .unit-num{
+    font-family:'Noto Sans KR',sans-serif;
+    font-weight:900;font-size:19pt;color:#fff;
+    width:50px;height:50px;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:7px;
+  }
+  .unit-titwrap{padding-top:1px;}
+  .unit-area{
+    font-family:'Noto Sans KR',sans-serif;
+    font-size:9pt;letter-spacing:.16em;font-weight:500;
+    text-transform:none;margin-bottom:3px;
+  }
+  .unit-title{font-size:22pt;font-weight:900;line-height:1.15;letter-spacing:-.01em;}
+  .unit-rule{height:3px;margin:0 0 20px;border-radius:2px;}
+
+  /* unit color application */
+  .u1 .unit-num,.u1 .cu-no{background:var(--u1);}
+  .u2 .unit-num,.u2 .cu-no{background:var(--u2);}
+  .u3 .unit-num,.u3 .cu-no{background:var(--u3);}
+  .u4 .unit-num,.u4 .cu-no{background:var(--u4);}
+  .u1 .unit-area{color:var(--u1);} .u1 .unit-rule{background:var(--u1);}
+  .u2 .unit-area{color:var(--u2);} .u2 .unit-rule{background:var(--u2);}
+  .u3 .unit-area{color:var(--u3);} .u3 .unit-rule{background:var(--u3);}
+  .u4 .unit-area{color:var(--u4);} .u4 .unit-rule{background:var(--u4);}
+
+  /* ============ SECTION (대단원 내 ▣) ============ */
+  .sec{margin:0 0 16px;}
+  .sec-head{
+    display:flex;align-items:center;gap:9px;
+    font-size:14.5pt;font-weight:700;
+    margin:18px 0 11px;
+    padding-left:13px;
+    position:relative;
+  }
+  .sec-head::before{
+    content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
+    width:5px;height:1.05em;border-radius:2px;
+  }
+  .u1 .sec-head::before{background:var(--u1);}
+  .u2 .sec-head::before{background:var(--u2);}
+  .u3 .sec-head::before{background:var(--u3);}
+  .u4 .sec-head::before{background:var(--u4);}
+  .sec-head .sec-no{
+    font-family:'Noto Sans KR',sans-serif;font-size:10pt;font-weight:700;
+    color:#fff;border-radius:50%;width:22px;height:22px;flex:none;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .u1 .sec-no{background:var(--u1);}
+  .u2 .sec-no{background:var(--u2);}
+  .u3 .sec-no{background:var(--u3);}
+  .u4 .sec-no{background:var(--u4);}
+
+  /* subsection label ① ② */
+  .subsec{margin:11px 0 9px;}
+  .subsec-t{
+    font-family:'Noto Sans KR',sans-serif;
+    font-size:11pt;font-weight:700;color:var(--ink);
+    margin-bottom:5px;display:flex;align-items:center;gap:6px;
+  }
+  .subsec-t .cir{
+    font-weight:700;font-size:10pt;
+    border:1.6px solid var(--ink-soft);border-radius:50%;
+    width:19px;height:19px;display:inline-flex;align-items:center;justify-content:center;
+    flex:none;color:var(--ink-soft);
+  }
+
+  /* ============ DEFINITION CARD ============ */
+  .card{
+    border:1px solid var(--line);
+    border-left:4px solid var(--ink-soft);
+    background:#fff;
+    border-radius:5px;
+    padding:11px 14px;
+    margin:9px 0;
+  }
+  .u1 .card.acc{border-left-color:var(--u1);background:var(--u1-bg);}
+  .u2 .card.acc{border-left-color:var(--u2);background:var(--u2-bg);}
+  .u3 .card.acc{border-left-color:var(--u3);background:var(--u3-bg);}
+  .u4 .card.acc{border-left-color:var(--u4);background:var(--u4-bg);}
+  .card .term{font-weight:700;font-size:11pt;}
+  .card .term .eng{font-family:'Noto Sans KR',sans-serif;font-weight:500;font-size:9.5pt;color:var(--ink-soft);}
+
+  /* ============ KEY-VALUE TERM LINES ============ */
+  .terms{margin:7px 0;}
+  .term-line{
+    display:flex;gap:10px;align-items:baseline;
+    padding:5.5px 2px;
+    border-bottom:1px dotted var(--line);
+    font-size:10.5pt;
+  }
+  .term-line:last-child{border-bottom:none;}
+  .term-line .k{
+    flex:none;width:118px;font-weight:700;color:var(--ink);
+    font-size:10.5pt;
+  }
+  .term-line .k.wide{width:150px;}
+  .term-line .v{flex:1;color:var(--ink-soft);}
+  .term-line .v b{color:var(--ink);font-weight:700;}
+
+  /* compact bullet list */
+  ul.tight{margin:6px 0;padding-left:0;list-style:none;}
+  ul.tight>li{
+    position:relative;padding-left:16px;margin:4.5px 0;font-size:10.5pt;line-height:1.55;
+  }
+  ul.tight>li::before{
+    content:"";position:absolute;left:3px;top:.62em;
+    width:5px;height:5px;border-radius:50%;background:var(--ink-soft);
+  }
+  ul.tight>li>ul{margin:3px 0 3px;padding-left:2px;list-style:none;}
+  ul.tight>li>ul>li{position:relative;padding-left:15px;margin:3px 0;font-size:10pt;color:var(--ink-soft);}
+  ul.tight>li>ul>li::before{
+    content:"–";position:absolute;left:2px;top:0;color:#a39e90;font-weight:700;
+  }
+
+  /* ============ COMPARISON TABLE ============ */
+  .cmp{
+    width:100%;border-collapse:collapse;margin:10px 0;font-size:10pt;
+    border:1px solid var(--line);border-radius:5px;overflow:hidden;
+  }
+  .cmp th,.cmp td{
+    border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top;
+  }
+  .cmp thead th{
+    font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:9.5pt;
+    color:#fff;text-align:center;
+  }
+  .u1 .cmp thead th{background:var(--u1);}
+  .u2 .cmp thead th{background:var(--u2);}
+  .u3 .cmp thead th{background:var(--u3);}
+  .u4 .cmp thead th{background:var(--u4);}
+  .cmp tbody th{
+    font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:9.5pt;
+    background:#f4f1e8;width:90px;color:var(--ink);text-align:center;vertical-align:middle;
+  }
+  .cmp td b{font-weight:700;}
+  .cmp .center{text-align:center;}
+
+  /* ============ PROCESS / SEQUENCE ============ */
+  .seq{
+    display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:11px 0;
+  }
+  .seq .step{
+    flex:1;min-width:0;
+    background:#fff;border:1px solid var(--line);
+    padding:8px 9px;border-radius:5px;position:relative;
+  }
+  .seq .step .sn{
+    font-family:'Noto Sans KR',sans-serif;font-size:8pt;font-weight:700;
+    letter-spacing:.08em;margin-bottom:3px;
+  }
+  .u1 .seq .step .sn{color:var(--u1);}
+  .u2 .seq .step .sn{color:var(--u2);}
+  .seq .step .sb{font-size:9.8pt;line-height:1.45;}
+  .seq .arrow{display:flex;align-items:center;padding:0 5px;color:#bdb8aa;font-weight:700;font-size:13pt;flex:none;}
+
+  /* ============ NOTE / TIP BLOCK ============ */
+  .note-block{
+    background:#f6f4ec;border-radius:5px;padding:9px 13px;margin:9px 0;
+    font-size:10pt;border:1px dashed var(--line);
+    display:flex;gap:9px;align-items:flex-start;
+  }
+  .note-block .nb-label{
+    font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:8.5pt;
+    flex:none;padding:1px 7px;border-radius:3px;color:#fff;background:var(--ink-soft);
+    margin-top:1px;letter-spacing:.03em;
+  }
+  .note-block.warn .nb-label{background:#b03a4a;}
+  .note-block .nb-body{flex:1;color:var(--ink-soft);}
+  .note-block .nb-body b{color:var(--ink);}
+
+  /* keyword highlight */
+  .hl{background:linear-gradient(transparent 55%, var(--hl) 55%);padding:0 1px;font-weight:600;}
+  .kw{font-weight:700;}
+  .u1 .kw{color:var(--u1);} .u2 .kw{color:var(--u2);}
+  .u3 .kw{color:var(--u3);} .u4 .kw{color:var(--u4);}
+  .arr{color:#a39e90;font-weight:700;font-family:'Noto Sans KR',sans-serif;}
+  sub,sup{font-family:'Noto Sans KR',sans-serif;}
+
+  /* small chemical formula styling */
+  .chem{font-family:'Noto Sans KR',sans-serif;font-weight:500;}
+
+  /* ============ EXAM SECTION ============ */
+  .exam-cover{
+    background:var(--exam);color:#fff;border-radius:8px;
+    padding:26px 26px 24px;margin:6px 0 22px;
+  }
+  .exam-cover .ec-eyebrow{
+    font-family:'Noto Sans KR',sans-serif;font-size:9.5pt;letter-spacing:.3em;
+    opacity:.8;font-weight:500;
+  }
+  .exam-cover h2{font-size:26pt;font-weight:900;margin:8px 0 10px;letter-spacing:-.01em;}
+  .exam-cover p{font-family:'Noto Sans KR',sans-serif;font-size:9.5pt;line-height:1.7;opacity:.92;margin:0;font-weight:400;}
+  .exam-cover .ec-tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:7px;}
+  .exam-cover .ec-tags span{
+    font-family:'Noto Sans KR',sans-serif;font-size:8.5pt;font-weight:500;
+    background:rgba(255,255,255,.16);padding:4px 11px;border-radius:20px;letter-spacing:.02em;
+  }
+
+  .qgroup-head{
+    font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:12pt;
+    color:var(--exam);margin:20px 0 12px;padding-bottom:6px;
+    border-bottom:2px solid var(--exam);display:flex;align-items:center;gap:8px;
+  }
+  .qgroup-head .qg-area{font-size:8.5pt;color:#8a93a5;font-weight:500;margin-left:auto;letter-spacing:.04em;}
+
+  .qbox{
+    border:1px solid #d3dae6;border-radius:6px;
+    margin:11px 0;padding:0;overflow:hidden;background:#fff;
+  }
+  .qbox .qhead{
+    display:flex;align-items:center;gap:9px;
+    background:var(--exam-bg);padding:7px 13px;border-bottom:1px solid #dde3ed;
+  }
+  .qbox .qno{
+    font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:9.5pt;
+    background:var(--exam);color:#fff;border-radius:4px;padding:2px 9px;flex:none;
+  }
+  .qbox .qtype{
+    font-family:'Noto Sans KR',sans-serif;font-size:8.5pt;font-weight:700;color:var(--exam);
+  }
+  .qbox .qpt{
+    margin-left:auto;font-family:'Noto Sans KR',sans-serif;font-size:8.5pt;color:#8a93a5;font-weight:500;
+  }
+  .qbox .qbody{padding:11px 14px 12px;}
+  .qbox .qstem{font-size:10.5pt;line-height:1.6;}
+  .qbox .qstem .uline{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:2.5px;font-weight:600;}
+
+  /* 보기/조건 box inside question */
+  .qcond{
+    border:1px solid #cfd6e2;border-radius:5px;margin:9px 0 4px;background:#fafbfd;
+  }
+  .qcond .qc-title{
+    font-family:'Noto Sans KR',sans-serif;font-size:8.5pt;font-weight:700;
+    text-align:center;color:var(--exam);background:#eef2f8;
+    padding:3px 0;border-bottom:1px solid #dde3ed;letter-spacing:.18em;
+  }
+  .qcond .qc-body{padding:8px 12px;font-size:9.8pt;line-height:1.6;}
+  .qcond .qc-body ul{margin:0;padding-left:0;list-style:none;}
+  .qcond .qc-body ul li{position:relative;padding-left:14px;margin:3px 0;}
+  .qcond .qc-body ul li::before{content:"○";position:absolute;left:0;top:0;font-size:7pt;color:#8a93a5;top:.25em;}
+  .qcond .qc-items{font-family:'Noto Sans KR',sans-serif;text-align:center;font-weight:500;letter-spacing:.02em;}
+
+  /* choice selectors ( A / B ) */
+  .pick{font-family:'Noto Sans KR',sans-serif;font-weight:500;}
+  .pick b{border-bottom:1px solid #b9c2d2;padding:0 2px;}
+
+  .qhint{
+    font-family:'Noto Sans KR',sans-serif;font-size:8.5pt;color:#9aa2b0;
+    margin-top:7px;font-weight:400;
+  }
+
+  .write-lines{margin-top:9px;}
+  .write-lines .wl{height:0;border-bottom:1px solid #dfe3ea;margin:13px 0;}
+
+  /* ============ ANSWER KEY ============ */
+  .ans-head{
+    font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:18pt;
+    color:var(--exam);border-bottom:3px solid var(--exam);padding-bottom:8px;margin:0 0 16px;
+  }
+  .ans-group{
+    font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:11pt;color:var(--exam);
+    margin:16px 0 8px;
+  }
+  .ans-row{
+    display:flex;gap:11px;padding:7px 0;border-bottom:1px solid var(--line-soft);
+    font-size:10pt;align-items:baseline;
+  }
+  .ans-row .an{
+    font-family:'Noto Sans KR',sans-serif;font-weight:700;color:#fff;background:var(--exam);
+    border-radius:4px;padding:1px 8px;flex:none;font-size:9pt;align-self:flex-start;margin-top:1px;
+  }
+  .ans-row .av{flex:1;color:var(--ink);}
+  .ans-row .av .lead{font-weight:700;color:var(--exam);}
+  .ans-row .av .pts{font-family:'Noto Sans KR',sans-serif;font-size:8.5pt;color:#9aa2b0;}
+
+  /* table of contents mini */
+  .toc{margin-top:6px;}
+  .toc-row{
+    display:flex;align-items:baseline;gap:12px;padding:9px 4px;border-bottom:1px solid var(--line-soft);
+  }
+  .toc-row .tn{font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:10pt;color:#fff;border-radius:4px;width:34px;text-align:center;padding:2px 0;flex:none;}
+  .toc-row .tt{font-size:12.5pt;font-weight:600;}
+  .toc-row .tp{margin-left:auto;font-family:'Noto Sans KR',sans-serif;font-size:9pt;color:#a9a499;}
+  .toc-row.x1 .tn{background:var(--u1);}
+  .toc-row.x2 .tn{background:var(--u2);}
+  .toc-row.x3 .tn{background:var(--u3);}
+  .toc-row.x4 .tn{background:var(--u4);}
+  .toc-row.xe .tn{background:var(--exam);}
+
+  .lead-in{font-size:10.5pt;color:var(--ink-soft);margin:2px 0 14px;line-height:1.6;}
+
+  /* print button */
+  .printbar{
+    position:fixed;top:14px;right:14px;z-index:99;
+  }
+  .printbar button{
+    font-family:'Noto Sans KR',sans-serif;font-size:11pt;font-weight:700;
+    background:var(--ink);color:#fff;border:none;border-radius:7px;
+    padding:11px 18px;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.3);
+  }
+  .printbar button:hover{background:#000;}
+</style>
+</head>
+<body>
+
+<div class="printbar no-print"><button onclick="window.print()">⎙ 인쇄 / PDF 저장</button></div>
+
+<!-- ============================ COVER ============================ -->
+<section class="page">
+  <div class="cover">
+    <div class="cover-eyebrow">생명과학 Ⅱ · 내신 시험대비</div>
+    <div class="cover-rule"></div>
+    <h1>핵심 정리 필기노트<span class="sub">— 광합성 · 유전 물질 · 생명 공학 기술 —</span></h1>
+
+    <div class="cover-meta">
+      <div><b>구성</b>　개념 정리 노트 + 서답형 예상 문제 + 정답·해설</div>
+      <div><b>특징</b>　구조화 요약 · 빠짐없는 범위 · 높은 가독성</div>
+      <div><b>대상</b>　2027 수능 대비 고3 내신 시험범위</div>
+    </div>
+
+    <div class="cover-units">
+      <div class="cover-unit u1"><span class="cu-no">Ⅲ</span><span class="cu-title">03 · 광합성</span><span class="cu-area">세포 호흡과 광합성</span></div>
+      <div class="cover-unit u2"><span class="cu-no">Ⅳ</span><span class="cu-title">01 · 유전 물질</span><span class="cu-area">유전자의 발현과 조절</span></div>
+      <div class="cover-unit u3"><span class="cu-no">Ⅵ</span><span class="cu-title">01 · 생명 공학 기술</span><span class="cu-area">생명 공학 기술과 인간 생활</span></div>
+      <div class="cover-unit u4"><span class="cu-no">Ⅵ</span><span class="cu-title">02 · 인간 생활과 생명 공학 기술의 활용</span><span class="cu-area">생명 공학 기술과 인간 생활</span></div>
+    </div>
+  </div>
+  <div class="pagenum">생명과학 Ⅱ 시험대비 노트</div>
+</section>
+
+<!-- ============================ TOC ============================ -->
+<section class="page">
+  <div class="runhead"><span class="rh-tag">목차 · CONTENTS</span><span>생명과학 Ⅱ 시험대비</span></div>
+  <div class="unit-head u1" style="margin-top:6mm;">
+    <div class="unit-titwrap">
+      <div class="unit-area" style="color:var(--ink-soft);">CONTENTS</div>
+      <div class="unit-title">목　차</div>
+    </div>
+  </div>
+  <div class="unit-rule" style="background:var(--ink);"></div>
+
+  <div class="lead-in">시험범위 4개 소단원을 단원 순서대로 정리하였습니다. 개념 노트를 먼저 학습한 뒤, 뒷부분의 서답형 예상 문제로 출제 유형에 대비하세요.</div>
+
+  <div class="toc">
+    <div class="toc-row x1"><span class="tn">PART 1</span><span class="tt">광합성</span><span class="tp">엽록체 · 광합성 색소 · 명반응 · 탄소 고정 · 세포 호흡 비교</span></div>
+    <div class="toc-row x2"><span class="tn">PART 2</span><span class="tt">유전 물질</span><span class="tp">유전체 구성 · DNA가 유전물질인 증거 · DNA 구조</span></div>
+    <div class="toc-row x3"><span class="tn">PART 3</span><span class="tt">생명 공학 기술</span><span class="tp">유전자 재조합 · 핵치환 · 조직 배양 · 세포 융합</span></div>
+    <div class="toc-row x4"><span class="tn">PART 4</span><span class="tt">생명 공학 기술의 활용</span><span class="tp">단일 클론 항체 · 유전자 치료 · 줄기세포 · LMO · 사회적 책임</span></div>
+    <div class="toc-row xe"><span class="tn">서답형</span><span class="tt">예상 문제 &amp; 정답·해설</span><span class="tp">단답형 · 서술형 · 옳은 것 선택형</span></div>
+  </div>
+
+  <div class="note-block" style="margin-top:26px;">
+    <span class="nb-label">학습TIP</span>
+    <span class="nb-body"><b class="kw" style="color:var(--ink);">색상 코드</b> — 각 단원은 고유 색으로 구분됩니다. <b style="color:var(--u1)">녹색=광합성</b>, <b style="color:var(--u2)">보라=유전물질</b>, <b style="color:var(--u3)">주황=생명공학기술</b>, <b style="color:var(--u4)">붉은색=기술의 활용</b>. 본문 중 색이 입혀진 굵은 글씨가 <b>핵심 빈출 용어</b>입니다.</span>
+  </div>
+  <div class="pagenum">목차</div>
+</section>
+
+<!-- ============================ PART 1 · 광합성 ============================ -->
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--u1)">PART 1 · 광합성</span><span>Ⅲ. 세포 호흡과 광합성</span></div>
+
+  <div class="unit-head u1" style="margin-top:6mm;">
+    <div class="unit-num">Ⅲ</div>
+    <div class="unit-titwrap">
+      <div class="unit-area">세포 호흡과 광합성</div>
+      <div class="unit-title">03 · 광합성</div>
+    </div>
+  </div>
+  <div class="unit-rule u1"></div>
+
+  <!-- 1. 엽록체 -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">1</span>엽록체의 구조와 기능</div>
+
+    <table class="cmp">
+      <thead><tr><th style="width:90px;">구조</th><th>특징 및 기능</th></tr></thead>
+      <tbody>
+        <tr><th>막 구조</th><td><b>외막 + 내막</b>의 2중막으로 둘러싸여 있다.</td></tr>
+        <tr><th>틸라코이드</th><td>납작한 <b>주머니 모양의 막 구조</b>. 여러 개가 쌓여 <b class="kw">그라나</b>를 이룬다. → 막에 <b>광합성 색소·전자 전달계·ATP 합성 효소</b> 존재</td></tr>
+        <tr><th>스트로마</th><td>틸라코이드를 <b>제외한 나머지 공간</b>. 광합성에 관여하는 <b>여러 효소</b>가 모여 있다.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-block"><span class="nb-label">핵심</span><span class="nb-body">엽록체는 내부에 <b>복잡한 막 구조(틸라코이드)</b>가 발달하여 <b>표면적을 넓혀</b> 광합성 효율을 높인다.</span></div>
+  </div>
+
+  <!-- 2. 광합성 색소 -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">2</span>광합성 색소</div>
+    <div class="lead-in" style="margin-bottom:8px;">틸라코이드 막에 있는 광합성 색소에서 <span class="kw">빛에너지가 흡수</span>된다.</div>
+
+    <div class="terms">
+      <div class="term-line"><span class="k">엽록소 a</span><span class="v">초록색. <b>광합성에서 가장 중심적인 역할</b>을 하는 색소 (반응 중심)</span></div>
+      <div class="term-line"><span class="k">엽록소 b</span><span class="v">초록색. 보조 색소</span></div>
+      <div class="term-line"><span class="k">카로티노이드</span><span class="v">황색·적황색(<b>카로틴·잔토필</b>). 빛에너지를 흡수해 엽록소에 전달하는 <b>보조 색소</b></span></div>
+    </div>
+
+    <div class="subsec">
+      <div class="subsec-t"><span class="cir">③</span>빛 흡수율과 광합성 속도</div>
+      <ul class="tight">
+        <li>엽록소는 <span class="hl">청자색·적색 빛을 주로 흡수</span> → 이 영역에서 광합성이 가장 활발 → 광합성에 필요한 에너지가 주로 엽록소에서 흡수됨을 의미</li>
+        <li>카로티노이드계 색소는 <b>초록색 빛</b>을 흡수하여 엽록소에 전달</li>
+      </ul>
+    </div>
+
+    <div class="note-block warn"><span class="nb-label">흡수 vs 작용</span><span class="nb-body"><b>흡수 스펙트럼</b>(파장별 빛 흡수율)과 <b>작용 스펙트럼</b>(파장별 광합성 속도)이 <b>거의 일치</b> → 엽록소가 광합성에 필요한 빛에너지를 주로 흡수함. 단, 엽록소가 거의 흡수하지 않는 파장에서도 광합성이 일어나는 이유는 <b>보조 색소(카로티노이드)</b>가 그 빛을 흡수하기 때문.</span></div>
+  </div>
+  <div class="pagenum">PART 1 · 광합성</div>
+</section>
+
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--u1)">PART 1 · 광합성</span><span>Ⅲ. 세포 호흡과 광합성</span></div>
+
+  <!-- 3. 광합성 과정 -->
+  <div class="sec" style="margin-top:6mm;">
+    <div class="sec-head"><span class="sec-no">3</span>광합성 과정 — 전체 개요</div>
+    <div class="lead-in" style="margin-bottom:8px;">물이 분해되어 산소 발생 + 이산화 탄소가 포도당으로 환원. 필요한 에너지는 <span class="kw">빛에너지</span>에서 공급.</div>
+
+    <table class="cmp">
+      <thead><tr><th style="width:88px;">구분</th><th>명반응</th><th>탄소 고정 반응</th></tr></thead>
+      <tbody>
+        <tr><th>장소</th><td class="center">틸라코이드 막</td><td class="center">스트로마</td></tr>
+        <tr><th>역할</th><td>빛에너지 → <b>화학 에너지</b> 전환</td><td>CO<sub>2</sub> 환원 → <b>포도당 합성</b></td></tr>
+        <tr><th>핵심 산물</th><td><b>ATP, NADPH</b> (+ O<sub>2</sub>)</td><td><b>포도당</b></td></tr>
+        <tr><th>관여 요소</th><td>광계 + 전자 전달계</td><td>스트로마의 여러 효소(캘빈 회로)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 명반응 -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">4</span>명반응</div>
+    <div class="card acc"><span class="term">명반응</span> — 엽록체의 <b>틸라코이드 막</b>에서 빛에너지를 흡수하여 <b>ATP와 NADPH</b>를 생성하는 과정 (광계 + 전자 전달계 작용)</div>
+
+    <div class="terms">
+      <div class="term-line"><span class="k">① 물의 광분해</span><span class="v">빛에너지로 물 분해 → <b>수소 이온(H⁺)·전자·산소</b> 발생. 전자는 전자 전달계를 거쳐 NADP⁺로 전달 → <b>NADPH</b> 생성</span></div>
+      <div class="term-line"><span class="k">② 광인산화</span><span class="v"><b>빛에너지를 이용한 ATP 합성 과정</b></span></div>
+      <div class="term-line"><span class="k">③ 광계</span><span class="v"><b>반응 중심</b>(엽록소 a + 1차 전자 수용체) + <b>안테나 색소</b>로 구성. 안테나 색소가 빛에너지를 모아 반응 중심 엽록소 a로 전달 → 엽록소 a가 <b>고에너지 전자 방출 후 산화</b></span></div>
+    </div>
+
+    <div class="subsec">
+      <div class="subsec-t"><span class="cir">④</span>전자 흐름</div>
+      <table class="cmp">
+        <thead><tr><th style="width:100px;">구분</th><th>비순환적 전자 흐름</th><th>순환적 전자 흐름</th></tr></thead>
+        <tbody>
+          <tr><th>관여 광계</th><td class="center"><b>광계 Ⅰ + 광계 Ⅱ 모두</b></td><td class="center"><b>광계 Ⅰ만</b></td></tr>
+          <tr><th>생성 물질</th><td><b>ATP + NADPH</b> 모두 생성</td><td><b>ATP만</b> 생성</td></tr>
+          <tr><th>전자 종착</th><td>최종적으로 NADP⁺에 전달 → NADPH</td><td>전자가 다시 <b>P<sub>700</sub></b>으로 돌아옴(순환)</td></tr>
+        </tbody>
+      </table>
+      <div class="qhint" style="font-family:'Noto Serif KR',serif;font-size:9.5pt;color:var(--ink-soft);margin-top:5px;">※ 공통점: 전자가 전자 전달계를 거치며 방출된 에너지로 <b>ATP 생성</b>.&nbsp; 광계 Ⅱ 반응중심 = P<sub>680</sub>, 광계 Ⅰ 반응중심 = P<sub>700</sub></div>
+    </div>
+
+    <div class="subsec">
+      <div class="subsec-t"><span class="cir">⑤</span>광인산화 (화학 삼투)</div>
+      <ul class="tight">
+        <li>빛에너지 흡수로 형성된 <span class="kw">H⁺의 농도 기울기</span>를 이용하여 ATP를 합성</li>
+        <li>스트로마의 H⁺을 틸라코이드 <b>안(내부)</b>으로 운반 → H⁺ 농도 기울기 형성 <span class="arr">→</span> 기울기에 따라 H⁺이 <b>스트로마 쪽으로 확산</b> → <b>ATP 합성 효소</b>에서 ATP 합성</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pagenum">PART 1 · 광합성</div>
+</section>
+
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--u1)">PART 1 · 광합성</span><span>Ⅲ. 세포 호흡과 광합성</span></div>
+
+  <!-- 탄소 고정 반응 -->
+  <div class="sec" style="margin-top:6mm;">
+    <div class="sec-head"><span class="sec-no">5</span>탄소 고정 반응 (캘빈 회로)</div>
+    <div class="card acc"><span class="term">탄소 고정 반응</span> — 엽록체의 <b>스트로마</b>에서 명반응이 만든 <b>ATP와 NADPH를 이용</b>하여 CO<sub>2</sub>를 포도당으로 환원하는 과정. <b>캘빈 회로</b>의 연속 반응으로 일어남.</div>
+
+    <div class="seq">
+      <div class="step"><div class="sn">STEP 1 · 탄소 고정</div><div class="sb"><b>3CO<sub>2</sub></b>가 5탄소 화합물 <b>RuBP 3분자</b>와 결합 → 6탄소 화합물 거쳐 <b>3PG 6분자</b>로 나뉨</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="sn">STEP 2 · 환원</div><div class="sb">명반응의 <b>ATP·NADPH</b>를 이용해 3PG가 더 높은 에너지의 <b>PGAL로 환원</b></div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="sn">STEP 3 · RuBP 재생</div><div class="sb">PGAL 6분자 중 <b>1분자 → 포도당</b>, <b>5분자 → RuBP 3분자</b>로 전환. RuBP는 다시 CO<sub>2</sub>와 결합해 회로 반복</div></div>
+    </div>
+  </div>
+
+  <!-- 광합성과 세포 호흡 비교 -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">6</span>광합성과 세포 호흡의 비교</div>
+
+    <table class="cmp">
+      <thead><tr><th style="width:92px;">구분</th><th>광합성</th><th>세포 호흡</th></tr></thead>
+      <tbody>
+        <tr><th>에너지 전환</th><td>빛에너지 → <b>포도당의 화학 에너지</b></td><td>포도당의 화학 에너지 → <b>ATP의 화학 에너지</b></td></tr>
+        <tr><th>ATP 합성<br>(공통점)</th><td colspan="2" class="center">둘 다 <b class="kw">화학 삼투</b>로 ATP를 합성한다.</td></tr>
+        <tr><th>H⁺ 농도 기울기<br>형성(차이점)</th><td><b>빛에너지 흡수</b>로 형성</td><td><b>포도당의 산화</b>로 형성</td></tr>
+        <tr><th>ATP 사용처</th><td><b>탄소 고정 반응</b>에 사용</td><td><b>세포의 생명 활동</b>에 사용</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-block"><span class="nb-label">통합</span><span class="nb-body">광합성과 세포 호흡은 모두 <b>태양의 빛에너지를 생명 활동에 사용하기 위한 에너지 전환 과정</b>이다. (광합성: 빛→포도당, 세포 호흡: 포도당→ATP)</span></div>
+  </div>
+  <div class="pagenum">PART 1 · 광합성</div>
+</section>
+
+<!-- ============================ PART 2 · 유전 물질 ============================ -->
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--u2)">PART 2 · 유전 물질</span><span>Ⅳ. 유전자의 발현과 조절</span></div>
+
+  <div class="unit-head u2" style="margin-top:6mm;">
+    <div class="unit-num">Ⅳ</div>
+    <div class="unit-titwrap">
+      <div class="unit-area">유전자의 발현과 조절</div>
+      <div class="unit-title">01 · 유전 물질</div>
+    </div>
+  </div>
+  <div class="unit-rule u2"></div>
+
+  <!-- 1. 유전체 구성 -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">1</span>원핵세포와 진핵세포의 유전체 구성</div>
+
+    <div class="terms">
+      <div class="term-line"><span class="k">유전자</span><span class="v">유전 정보를 저장하고 있는 <b>DNA의 특정 염기 서열</b></span></div>
+      <div class="term-line"><span class="k">유전체</span><span class="v">한 개체의 유전 정보가 저장되어 있는 <b>DNA 전체</b></span></div>
+    </div>
+
+    <table class="cmp">
+      <thead><tr><th style="width:96px;">구분</th><th>원핵세포</th><th>진핵세포</th></tr></thead>
+      <tbody>
+        <tr><th>DNA 형태</th><td><b>원형</b> DNA <b>1개</b></td><td><b>선형</b> DNA <b>여러 개</b></td></tr>
+        <tr><th>핵막</th><td>핵막 <b>없음</b> → 세포질에 퍼져 있음</td><td>핵막으로 <b>둘러싸여 있음</b></td></tr>
+        <tr><th>특이 사항</th><td><b>플라스미드</b>(작은 원형 DNA)가 더 있기도 함</td><td>DNA가 <b>히스톤과 결합</b>, 세포 분열 시 <b>염색체</b> 형성</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2. DNA가 유전물질이라는 증거 -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">2</span>DNA가 유전 물질이라는 증거</div>
+
+    <table class="cmp">
+      <thead><tr><th style="width:96px;">실험</th><th>내용</th><th>결론</th></tr></thead>
+      <tbody>
+        <tr><th>그리피스<br>(폐렴쌍구균)</th><td>죽은 S형균 + 살아 있는 R형균 주입 → 쥐 죽음. 혈액에서 살아 있는 S형균 발견</td><td>죽은 S형균의 <b>어떤 물질</b>에 의해 R형균이 S형균으로 <b>형질 전환</b></td></tr>
+        <tr><th>에이버리</th><td>S형균 추출물을 각 분해 효소로 처리 → <b>DNA 분해 효소</b> 처리 시에만 형질 전환 안 일어남</td><td>형질 전환을 일으키는 물질은 <b class="kw">DNA</b></td></tr>
+        <tr><th>허시·체이스<br>(박테리오파지)</th><td><sup>35</sup>S(단백질)·<sup>32</sup>P(DNA)로 표지 → 대장균 내부로 <b>DNA(<sup>32</sup>P)</b>만 들어감</td><td>DNA가 다음 세대의 DNA·단백질을 생성하는 <b>유전 물질</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagenum">PART 2 · 유전 물질</div>
+</section>
+
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--u2)">PART 2 · 유전 물질</span><span>Ⅳ. 유전자의 발현과 조절</span></div>
+
+  <!-- 3. DNA 구조 -->
+  <div class="sec" style="margin-top:6mm;">
+    <div class="sec-head"><span class="sec-no">3</span>DNA의 구조</div>
+
+    <div class="subsec">
+      <div class="subsec-t"><span class="cir">①</span>DNA의 구성</div>
+      <div class="terms">
+        <div class="term-line"><span class="k">구성 단위</span><span class="v"><b>뉴클레오타이드</b> — <b>인산 : 당 : 염기 = 1 : 1 : 1</b>로 결합</span></div>
+        <div class="term-line"><span class="k">당</span><span class="v"><b>디옥시리보스</b></span></div>
+        <div class="term-line"><span class="k">염기</span><span class="v"><b>아데닌(A)·구아닌(G)·사이토신(C)·타이민(T)</b></span></div>
+      </div>
+    </div>
+
+    <table class="cmp">
+      <thead><tr><th style="width:120px;">염기 계열</th><th>고리 구조</th><th>해당 염기</th></tr></thead>
+      <tbody>
+        <tr><th>퓨린 계열</th><td class="center">고리 구조 <b>2개</b></td><td class="center"><b>A, G</b></td></tr>
+        <tr><th>피리미딘 계열</th><td class="center">고리 구조 <b>1개</b></td><td class="center"><b>C, T</b></td></tr>
+      </tbody>
+    </table>
+
+    <div class="card acc" style="margin-top:10px;"><span class="term">폴리뉴클레오타이드</span> — 뉴클레오타이드끼리 결합하여 형성. <b>당-인산 골격</b>을 따라 <b class="hl">5′ → 3′ 방향성</b>을 나타낸다.</div>
+
+    <div class="subsec">
+      <div class="subsec-t"><span class="cir">②</span>DNA의 입체 구조</div>
+      <ul class="tight">
+        <li>폴리뉴클레오타이드 <b>두 가닥</b>이 나선 모양으로 꼬인 <span class="kw">이중 나선 구조</span></li>
+        <li>두 가닥의 염기가 쌍을 이룰 때 <b class="hl">A은 항상 T과, G는 항상 C와 상보적으로 결합</b> (수소 결합)</li>
+        <li><b>샤가프 법칙</b> → DNA 이중 나선에서 <b>A 수 = T 수</b>, <b>G 수 = C 수</b></li>
+      </ul>
+    </div>
+
+    <div class="note-block"><span class="nb-label">수치</span><span class="nb-body">DNA 이중 나선: 염기쌍 <b>10개당 3.4 nm</b>(한 바퀴), 염기쌍 사이 간격 <b>0.34 nm</b>, 지름 <b>2 nm</b>. 두 가닥은 <b>역평행</b>(서로 반대 방향)으로 배열.</span></div>
+  </div>
+  <div class="pagenum">PART 2 · 유전 물질</div>
+</section>
+
+<!-- ============================ PART 3 · 생명 공학 기술 ============================ -->
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--u3)">PART 3 · 생명 공학 기술</span><span>Ⅵ. 생명 공학 기술과 인간 생활</span></div>
+
+  <div class="unit-head u3" style="margin-top:6mm;">
+    <div class="unit-num">Ⅵ</div>
+    <div class="unit-titwrap">
+      <div class="unit-area">생명 공학 기술과 인간 생활</div>
+      <div class="unit-title">01 · 생명 공학 기술</div>
+    </div>
+  </div>
+  <div class="unit-rule u3"></div>
+
+  <!-- 1. 유전자 재조합 -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">1</span>유전자 재조합 기술</div>
+    <div class="card acc"><span class="term">유전자 재조합 기술</span> — 서로 다른 생물의 DNA를 인위적으로 <b>자르고 연결</b>하여 새로운 유전자 조합의 DNA를 만드는 기술</div>
+
+    <div class="terms">
+      <div class="term-line"><span class="k">기본 원리</span><span class="v">특정 유전자를 <b>DNA 운반체에 삽입</b> → 재조합 DNA 제작 → <b>세포에 넣어 발현</b>시킴</span></div>
+      <div class="term-line"><span class="k">이용 예</span><span class="v">인슐린·인터페론·혈전 용해제·간염 백신 등 의약품 대량 생산, 형질 전환 농작물·가축 개발</span></div>
+    </div>
+
+    <div class="subsec">
+      <div class="subsec-t"><span class="cir">④</span>유전자 재조합에 필요한 요소</div>
+      <table class="cmp">
+        <thead><tr><th style="width:118px;">요소</th><th>역할</th></tr></thead>
+        <tbody>
+          <tr><th>유용한 유전자</th><td>유용한 물질을 만드는 유전자</td></tr>
+          <tr><th>DNA 운반체</th><td>유용한 유전자를 숙주 세포로 운반하는 DNA → 세균의 <b class="kw">플라스미드</b>가 주로 사용</td></tr>
+          <tr><th>제한 효소</th><td>DNA의 <b>특정 염기 서열을 인식하여 자르는</b> 효소. 종류에 따라 인식 서열이 다름</td></tr>
+          <tr><th>DNA 연결 효소</th><td>DNA 조각 <b>2개를 결합</b>시키는 효소</td></tr>
+          <tr><th>숙주 세포</th><td>재조합 DNA를 이식받을 세포 → <b class="kw">대장균</b>이 주로 사용</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsec">
+      <div class="subsec-t"><span class="cir">⑤</span>유전자 재조합 과정</div>
+      <div class="seq">
+        <div class="step"><div class="sn">STEP 1</div><div class="sb"><b>제한 효소</b>로 DNA의 특정 염기 서열을 자른다</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="sn">STEP 2</div><div class="sb"><b>같은 제한 효소</b>로 자른 다른 DNA 조각과 혼합 → 염기가 <b>상보적으로 결합</b></div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="sn">STEP 3</div><div class="sb"><b>DNA 연결 효소</b>로 DNA 조각을 연결 → <b>재조합 DNA</b> 완성</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="pagenum">PART 3 · 생명 공학 기술</div>
+</section>
+
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--u3)">PART 3 · 생명 공학 기술</span><span>Ⅵ. 생명 공학 기술과 인간 생활</span></div>
+
+  <!-- 2. 핵치환 -->
+  <div class="sec" style="margin-top:6mm;">
+    <div class="sec-head"><span class="sec-no">2</span>핵치환</div>
+    <div class="card acc"><span class="term">핵치환</span> — 어떤 세포에서 <b>핵을 꺼내어</b> 핵을 제거한 다른 세포에 <b>이식</b>하는 기술</div>
+    <ul class="tight">
+      <li><b>이용 예</b> : 복제 동물의 생산, <b>체세포 복제 배아 줄기세포</b> 생산</li>
+      <li><b>복제 동물 과정</b> : 체세포에서 핵 추출 → 핵을 제거한 난자에 핵치환 → 세포 분열로 배아 형성 → <b>대리모 자궁에 배아 이식</b> → 복제 동물 탄생</li>
+    </ul>
+  </div>
+
+  <!-- 3. 조직 배양 -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">3</span>조직 배양</div>
+    <div class="card acc"><span class="term">조직 배양</span> — 생물의 조직 일부나 세포를 떼어 내어 <b>영양분이 든 인공 배지에서 증식</b>시키는 기술</div>
+    <ul class="tight">
+      <li><b>이용 예</b> : 복제 식물의 생산, DNA 재조합·핵치환 기술로 만들어진 세포·조직을 배양</li>
+      <li><b>복제 식물 과정</b>(당근) : 세포를 영양 배지에서 배양 → <b>캘러스</b> 형성 → 분리해 영양 용액에서 재배양 → 캘러스로부터 형성된 <b>배</b>를 배지로 옮겨 배양 → 어린 식물 → 다 자란 식물</li>
+    </ul>
+  </div>
+
+  <!-- 4. 세포 융합 -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">4</span>세포 융합</div>
+    <div class="card acc"><span class="term">세포 융합</span> — 서로 다른 두 종류의 세포를 융합하여 새로운 <b>잡종 세포</b>를 만드는 기술</div>
+    <ul class="tight">
+      <li><b>이용 예</b> : 잡종 식물의 생산, <b>단일 클론 항체</b>의 생산</li>
+      <li><b>잡종 식물 과정</b>(포마토) : 토마토·감자의 <b>세포벽 제거</b> → 원형질체 → <b>세포 융합</b> → 핵 융합 → 잡종 세포 → <b>조직 배양</b> → 포마토</li>
+    </ul>
+
+    <div class="note-block"><span class="nb-label">정리</span><span class="nb-body">4대 생명 공학 기술 — <b>유전자 재조합</b>(DNA 자르고 연결), <b>핵치환</b>(핵 이식), <b>조직 배양</b>(인공 배지 증식), <b>세포 융합</b>(두 세포 융합). 조직 배양과 세포 융합은 서로 연계되어 사용된다.</span></div>
+  </div>
+  <div class="pagenum">PART 3 · 생명 공학 기술</div>
+</section>
+
+<!-- ============================ PART 4 · 활용 ============================ -->
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--u4)">PART 4 · 기술의 활용</span><span>Ⅵ. 생명 공학 기술과 인간 생활</span></div>
+
+  <div class="unit-head u4" style="margin-top:6mm;">
+    <div class="unit-num">Ⅵ</div>
+    <div class="unit-titwrap">
+      <div class="unit-area">생명 공학 기술과 인간 생활</div>
+      <div class="unit-title">02 · 인간 생활과 생명 공학 기술의 활용</div>
+    </div>
+  </div>
+  <div class="unit-rule u4"></div>
+
+  <!-- 1. 난치병 치료 -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">1</span>생명 공학 기술을 활용한 난치병 치료</div>
+
+    <div class="subsec">
+      <div class="subsec-t"><span class="cir">▣</span>단일 클론 항체</div>
+      <div class="card acc"><span class="term">단일 클론 항체</span> — <b>B 림프구와 암세포</b>를 세포 융합하여 만든 <b>잡종 세포</b>로부터 얻은 <b>한 종류의 항체</b></div>
+      <ul class="tight">
+        <li>잡종 세포는 <b>항체 생산</b> + <b>인공 배지에서 분열</b> 가능 + 수명 <b>반영구적</b></li>
+        <li><b>이용 예</b> : 병원균 감염 여부 진단, 암 치료, <b>임신 진단 키트</b></li>
+      </ul>
+    </div>
+
+    <div class="subsec">
+      <div class="subsec-t"><span class="cir">▣</span>유전자 치료</div>
+      <div class="card acc"><span class="term">유전자 치료</span> — 유전적 결함이 있는 사람에게 <b>정상 유전자를 넣어</b> 이상 유전자를 대체하거나 정상 단백질이 합성되게 하여 질병을 치료하는 방법</div>
+      <ul class="tight">
+        <li><b>이용 예</b> : 암·유전병 같은 난치병 치료</li>
+        <li><b>과정</b>(중증 복합 면역 결핍증) : 정상 유전자를 <b>바이러스(DNA 운반체)</b>에 삽입 → 환자의 <b>골수 세포</b>에 정상 유전자 도입 → 골수 세포를 환자의 골수에 이식</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pagenum">PART 4 · 기술의 활용</div>
+</section>
+
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--u4)">PART 4 · 기술의 활용</span><span>Ⅵ. 생명 공학 기술과 인간 생활</span></div>
+
+  <!-- 줄기세포 -->
+  <div class="sec" style="margin-top:6mm;">
+    <div class="sec-head"><span class="sec-no">1</span>줄기세포</div>
+    <div class="card acc"><span class="term">줄기세포</span> — 몸을 구성하는 근육 세포·신경 세포·혈구 등으로 <b>분화할 수 있는 능력</b>을 가진 <b>미분화 세포</b></div>
+    <div class="lead-in" style="margin:8px 0;"><b>이용 예</b> : 관절염 환자에 주사하여 연골 세포 재생, 치매·파킨슨병 환자에 주사하여 신경 세포 재생</div>
+
+    <table class="cmp">
+      <thead><tr><th style="width:96px;">종류</th><th>획득 방법</th><th>특징 및 문제점</th></tr></thead>
+      <tbody>
+        <tr><th>배아 줄기세포</th><td>초기 배아에서 <b>핵치환 기술</b>로 획득</td><td>몸을 구성하는 <b>어떤 세포로든 분화 가능</b> / <b>생명 윤리 문제</b> 발생</td></tr>
+        <tr><th>성체 줄기세포</th><td>탯줄 혈액이나 성체의 <b>골수</b> 등에서 획득</td><td>생명 윤리 문제 <b>피할 수 있음</b> / 증식 어렵고 <b>모든 세포·조직으로 분화 불가</b></td></tr>
+        <tr><th>유도 만능<br>줄기세포</th><td>성체의 체세포를 <b>역분화</b>시켜 획득</td><td>생명 윤리 문제 <b>자유로움</b> + <b>면역 거부 반응 없음</b> / 역분화 과정에서 <b>유전자 변이</b> 가능</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LMO -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">2</span>유전자 변형 생물체(LMO)의 개발과 이용</div>
+    <div class="card acc"><span class="term">유전자 변형 생물체 <span class="eng">(LMO)</span></span> — 생명 공학 기술을 이용하여 만들어진 <b>새로운 조합의 유전 물질</b>을 가진 생물</div>
+
+    <div class="terms">
+      <div class="term-line"><span class="k wide">식량 자원</span><span class="v">병충해에 강한 옥수수, 제초제 저항성 콩, 가뭄·염분에 강한 벼, 우유 많이 생산하는 젖소, <b>슈퍼 연어</b>, 프로비타민 A 생산 <b>황금쌀</b>, 항산화 물질 많은 보라색 토마토</span></div>
+      <div class="term-line"><span class="k wide">의약품 생산</span><span class="v">인슐린·생장 호르몬 생산 세균, 혈액 응고 단백질을 <b>젖으로 분비</b>하는 염소</span></div>
+      <div class="term-line"><span class="k wide">환경 정화</span><span class="v">중금속(카드뮴·납) 흡수 식물, 기름·독성 유기 화학물 분해 세균</span></div>
+      <div class="term-line"><span class="k wide">신재생 에너지</span><span class="v">바이오 에탄올용 고구마, 세포벽이 쉽게 분해되는 작물, 당→에탄올 효소 대량 생산 미생물</span></div>
+    </div>
+  </div>
+  <div class="pagenum">PART 4 · 기술의 활용</div>
+</section>
+
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--u4)">PART 4 · 기술의 활용</span><span>Ⅵ. 생명 공학 기술과 인간 생활</span></div>
+
+  <!-- 사회적 책임 -->
+  <div class="sec" style="margin-top:6mm;">
+    <div class="sec-head"><span class="sec-no">3</span>생명 공학 기술의 활용과 사회적 책임</div>
+
+    <table class="cmp">
+      <thead><tr><th style="width:96px;">문제 유형</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><th>생태학적<br>문제</th><td>LMO 재배로 <b>생태계 교란</b>, <b>생물 다양성 파괴</b> 가능</td></tr>
+        <tr><th>법적 문제</th><td>특정 생명체·유전자 사용 권리를 <b>소수 기업이 독점</b> → 법적 분쟁 발생 가능</td></tr>
+        <tr><th>사회적<br>문제</th><td>LMO가 <b>특허 대상</b>이 되면서 질병 치료·식량 구입에 <b>막대한 비용</b> 지불 가능</td></tr>
+        <tr><th>윤리적<br>문제</th><td>포유류 복제가 <b>인간 복제</b>로 이어질 우려, 배아 사용은 <b>생명 경시</b> 비판, <b>유전자 맞춤형 아기</b> 탄생 우려 <span class="arr">→</span> <b>생명 윤리에 관한 법률</b> 제정</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-block warn"><span class="nb-label">서술 포인트</span><span class="nb-body">LMO의 <b>긍정적 영향</b>(식량 증산·의약품·환경 정화·에너지)과 <b>부정적 영향</b>(생태계 교란·생물 다양성 파괴·독점·윤리 문제)을 균형 있게 서술할 수 있어야 한다.</span></div>
+  </div>
+
+  <div class="note-block" style="margin-top:24px;">
+    <span class="nb-label">개념 정리 끝</span>
+    <span class="nb-body">여기까지가 시험범위 <b>4개 소단원</b>의 핵심 개념입니다. 다음 장부터는 업로드한 1차 고사 서답형 시험지의 <b>유형·형식을 참고</b>하여, 이번 시험범위 내용으로 재구성한 <b>서답형 예상 문제</b>가 이어집니다.</span>
+  </div>
+  <div class="pagenum">PART 4 · 기술의 활용</div>
+</section>
+
+<!-- ============================ 서답형 예상 문제 표지 ============================ -->
+<section class="page">
+  <div class="exam-cover" style="margin-top:30mm;">
+    <div class="ec-eyebrow">예상 문제 · MOCK QUESTIONS</div>
+    <h2>서답형 예상 문제</h2>
+    <p>업로드된 1차 고사 서답형 시험지의 출제 유형(단답형·서술형·옳은 것 선택형·조건 활용 서술형)을 참고하여, 이번 시험범위 4개 소단원 내용으로 구성하였습니다. 풀이 과정도 함께 작성하는 연습을 하세요.</p>
+    <div class="ec-tags">
+      <span>단답형</span><span>서술형</span><span>옳은 것 선택형</span><span>조건 활용 서술형</span><span>그래프 작성형</span>
+    </div>
+  </div>
+
+  <div class="note-block warn">
+    <span class="nb-label">유의</span>
+    <span class="nb-body">서답형은 <b>정답뿐 아니라 풀이 과정</b>에도 점수가 있습니다. 조건이 주어진 문제는 <b>반드시 조건을 활용</b>하고, <b>문장으로 서술</b>하라는 지시가 있으면 단어 나열이 아닌 완전한 문장으로 작성하세요. 정답·해설은 마지막 장에 별도로 수록했습니다.</span>
+  </div>
+  <div class="pagenum">서답형 예상 문제</div>
+</section>
+
+<!-- ============================ 문제 · PART 1 광합성 ============================ -->
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--exam)">서답형 예상 문제</span><span>출제 범위 · 광합성</span></div>
+
+  <div class="qgroup-head" style="margin-top:6mm;">Ⅰ. 광합성<span class="qg-area">Ⅲ. 세포 호흡과 광합성</span></div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">1</span><span class="qtype">단답형</span><span class="qpt">[3점]</span></div>
+    <div class="qbody"><div class="qstem">엽록체에서 틸라코이드가 여러 개 쌓여 형성된 구조를 무엇이라고 하는지 쓰시오.</div></div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">2</span><span class="qtype">단답형</span><span class="qpt">[3점]</span></div>
+    <div class="qbody"><div class="qstem">광합성 색소 중 <span class="pick">황색이나 적황색을 띠며 빛에너지를 흡수하여 엽록소에 전달하는 <b>보조 색소</b></span>의 종류를 무엇이라고 하는지 쓰시오. (예: 카로틴, 잔토필)</div></div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">3</span><span class="qtype">서술형</span><span class="qpt">[4점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">엽록소의 <span class="qstem"><span class="uline">흡수 스펙트럼</span></span>과 엽록체의 <span class="uline">작용 스펙트럼</span>이 거의 일치한다는 사실로부터 내릴 수 있는 결론이 무엇인지 서술하시오.</div>
+      <div class="write-lines"><div class="wl"></div><div class="wl"></div></div>
+    </div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">4</span><span class="qtype">서술형</span><span class="qpt">[4점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">광합성은 명반응과 탄소 고정 반응으로 구분된다. 두 반응이 <span class="uline">각각 일어나는 장소</span>를 쓰고, 명반응에서 생성되어 탄소 고정 반응에 사용되는 <span class="uline">두 가지 물질</span>을 쓰시오.</div>
+      <div class="write-lines"><div class="wl"></div><div class="wl"></div></div>
+    </div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">5</span><span class="qtype">옳은 것 선택형</span><span class="qpt">[6점, 각 1점]</span></div>
+    <div class="qbody">
+      <div class="qstem">광합성의 전자 흐름에 대한 설명이다. 괄호 안에서 옳은 것을 고르시오.</div>
+      <div class="qcond">
+        <div class="qc-title">조 　 건</div>
+        <div class="qc-body">
+          <ul>
+            <li>비순환적 전자 흐름에는 광계 Ⅰ과 광계 Ⅱ가 ( <span class="pick"><b>모두 관여한다</b> / <b>관여하지 않는다</b></span> ).</li>
+            <li>비순환적 전자 흐름에서는 ATP가 ( <span class="pick"><b>생성된다</b> / <b>생성되지 않는다</b></span> )와/과 NADPH가 ( <span class="pick"><b>생성된다</b> / <b>생성되지 않는다</b></span> ).</li>
+            <li>순환적 전자 흐름에는 광계 ( <span class="pick"><b>Ⅰ</b> / <b>Ⅱ</b></span> )만 관여한다.</li>
+            <li>순환적 전자 흐름에서는 ( <span class="pick"><b>ATP</b> / <b>NADPH</b></span> )만 생성된다.</li>
+            <li>물의 광분해 결과 수소 이온, 전자와 함께 ( <span class="pick"><b>산소</b> / <b>이산화 탄소</b></span> )가 발생한다.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pagenum">서답형 예상 문제 · 광합성</div>
+</section>
+
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--exam)">서답형 예상 문제</span><span>출제 범위 · 광합성</span></div>
+
+  <div class="qbox" style="margin-top:6mm;">
+    <div class="qhead"><span class="qno">6</span><span class="qtype">조건 활용 서술형</span><span class="qpt">[8점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">광합성의 명반응에서 일어나는 <span class="uline">광인산화 과정</span>을 아래 &lt;조건&gt;의 용어를 모두 활용하여 문장으로 서술하시오. (단, 문장으로 서술하지 않을 시 감점)</div>
+      <div class="qcond">
+        <div class="qc-title">조 　 건</div>
+        <div class="qc-body qc-items">H⁺(수소 이온) 농도 기울기 ㆍ 틸라코이드 내부 ㆍ 스트로마 ㆍ ATP 합성 효소 ㆍ 화학 삼투</div>
+      </div>
+      <div class="write-lines"><div class="wl"></div><div class="wl"></div><div class="wl"></div></div>
+    </div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">7</span><span class="qtype">서술형</span><span class="qpt">[6점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">탄소 고정 반응(캘빈 회로)은 <span class="uline">탄소 고정 → 환원 → RuBP 재생</span>의 3단계로 구성된다. 각 단계에서 일어나는 변화를 RuBP, 3PG, PGAL, 포도당을 포함하여 단계별로 서술하시오.</div>
+      <div class="write-lines"><div class="wl"></div><div class="wl"></div><div class="wl"></div></div>
+    </div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">8</span><span class="qtype">조건 활용 서술형</span><span class="qpt">[6점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">광합성과 세포 호흡의 전자 전달계에서 일어나는 ATP 합성을 비교하여 <span class="uline">공통점과 차이점</span>을 각각 한 문장씩 서술하시오.</div>
+      <div class="qcond">
+        <div class="qc-title">조 　 건</div>
+        <div class="qc-body">
+          <ul>
+            <li>공통점은 ATP 합성 방식(화학 삼투)을 포함하여 서술할 것.</li>
+            <li>차이점은 H⁺ 농도 기울기 형성의 에너지원을 포함하여 서술할 것.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="write-lines"><div class="wl"></div><div class="wl"></div></div>
+    </div>
+  </div>
+  <div class="pagenum">서답형 예상 문제 · 광합성</div>
+</section>
+
+<!-- ============================ 문제 · PART 2 유전 물질 ============================ -->
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--exam)">서답형 예상 문제</span><span>출제 범위 · 유전 물질</span></div>
+
+  <div class="qgroup-head" style="margin-top:6mm;">Ⅱ. 유전 물질<span class="qg-area">Ⅳ. 유전자의 발현과 조절</span></div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">9</span><span class="qtype">단답형</span><span class="qpt">[3점]</span></div>
+    <div class="qbody"><div class="qstem">한 개체의 유전 정보가 저장되어 있는 <span class="pick"><b>DNA 전체</b></span>를 무엇이라고 하는지 쓰시오.</div></div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">10</span><span class="qtype">단답형</span><span class="qpt">[4점]</span></div>
+    <div class="qbody"><div class="qstem">DNA의 구성 단위로, <span class="uline">인산, 당, 염기가 1 : 1 : 1로 결합</span>한 물질을 무엇이라고 하는지 쓰시오.</div></div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">11</span><span class="qtype">서술형</span><span class="qpt">[4점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">원핵세포와 진핵세포의 유전체를 <span class="uline">DNA의 형태</span>와 <span class="uline">핵막의 유무</span> 두 가지 기준으로 비교하여 서술하시오.</div>
+      <div class="write-lines"><div class="wl"></div><div class="wl"></div></div>
+    </div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">12</span><span class="qtype">옳은 것 선택형</span><span class="qpt">[4점, 각 1점]</span></div>
+    <div class="qbody">
+      <div class="qstem">DNA를 구성하는 염기에 대한 설명이다. 괄호 안에서 옳은 것을 고르시오.</div>
+      <div class="qcond">
+        <div class="qc-title">조 　 건</div>
+        <div class="qc-body">
+          <ul>
+            <li>퓨린 계열 염기는 고리 구조가 ( <span class="pick"><b>1개</b> / <b>2개</b></span> )이며, 여기에 해당하는 염기는 ( <span class="pick"><b>A·G</b> / <b>C·T</b></span> )이다.</li>
+            <li>DNA 이중 나선에서 A은 항상 ( <span class="pick"><b>T</b> / <b>G</b></span> )과/와 상보적으로 결합한다.</li>
+            <li>이중 나선을 이루는 두 가닥에서 G의 수와 ( <span class="pick"><b>C</b> / <b>A</b></span> )의 수는 같다.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">13</span><span class="qtype">서술형</span><span class="qpt">[4점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">에이버리의 실험에서 죽은 S형균 추출물을 단백질 분해 효소, RNA 분해 효소, DNA 분해 효소로 각각 처리하였을 때, <span class="uline">DNA 분해 효소로 처리한 경우에만 형질 전환이 일어나지 않았다.</span> 이 결과로부터 내릴 수 있는 결론을 서술하시오.</div>
+      <div class="write-lines"><div class="wl"></div><div class="wl"></div></div>
+    </div>
+  </div>
+  <div class="pagenum">서답형 예상 문제 · 유전 물질</div>
+</section>
+
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--exam)">서답형 예상 문제</span><span>출제 범위 · 유전 물질</span></div>
+
+  <div class="qbox" style="margin-top:6mm;">
+    <div class="qhead"><span class="qno">14</span><span class="qtype">조건 활용 서술형</span><span class="qpt">[6점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">DNA의 입체 구조를 아래 &lt;조건&gt;의 용어를 모두 활용하여 문장으로 서술하시오.</div>
+      <div class="qcond">
+        <div class="qc-title">조 　 건</div>
+        <div class="qc-body qc-items">이중 나선 ㆍ 폴리뉴클레오타이드 두 가닥 ㆍ 상보결합 ㆍ 당-인산 골격 ㆍ A=T, G=C</div>
+      </div>
+      <div class="write-lines"><div class="wl"></div><div class="wl"></div><div class="wl"></div></div>
+    </div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">15</span><span class="qtype">단답형</span><span class="qpt">[3점]</span></div>
+    <div class="qbody"><div class="qstem">허시와 체이스의 박테리오파지 증식 실험에서, 방사성 동위 원소 <span class="pick"><b>³²P로 표지한 물질</b></span>이 대장균 내부로 들어간 것으로 보아, 유전 물질에 해당하는 것은 단백질과 DNA 중 무엇인지 쓰시오.</div></div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">16</span><span class="qtype">서술형</span><span class="qpt">[4점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">폴리뉴클레오타이드가 나타내는 <span class="uline">방향성</span>을 쓰고, 그 방향성이 당-인산 골격의 무엇을 기준으로 정해지는지 서술하시오.</div>
+      <div class="write-lines"><div class="wl"></div><div class="wl"></div></div>
+    </div>
+  </div>
+  <div class="pagenum">서답형 예상 문제 · 유전 물질</div>
+</section>
+
+<!-- ============================ 문제 · PART 3 생명 공학 기술 ============================ -->
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--exam)">서답형 예상 문제</span><span>출제 범위 · 생명 공학 기술</span></div>
+
+  <div class="qgroup-head" style="margin-top:6mm;">Ⅲ. 생명 공학 기술<span class="qg-area">Ⅵ. 생명 공학 기술과 인간 생활</span></div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">17</span><span class="qtype">단답형</span><span class="qpt">[3점]</span></div>
+    <div class="qbody"><div class="qstem">DNA의 <span class="uline">특정 염기 서열을 인식하여 자르는</span> 효소를 무엇이라고 하는지 쓰시오.</div></div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">18</span><span class="qtype">단답형</span><span class="qpt">[3점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">&lt;보기&gt;는 유전자 재조합에 필요한 요소이다. 이 중에서 <span class="uline">유용한 유전자를 숙주 세포로 운반하는 역할</span>을 하는 것을 모두 골라 쓰시오.</div>
+      <div class="qcond">
+        <div class="qc-title">보 　 기</div>
+        <div class="qc-body qc-items">제한 효소 ㆍ DNA 연결 효소 ㆍ 플라스미드(DNA 운반체) ㆍ 대장균(숙주 세포)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">19</span><span class="qtype">서술형</span><span class="qpt">[4점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">유전자 재조합 과정에서 서로 다른 두 DNA 조각을 자를 때 <span class="uline">반드시 같은 제한 효소를 사용해야 하는 까닭</span>을 서술하시오.</div>
+      <div class="write-lines"><div class="wl"></div><div class="wl"></div></div>
+    </div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">20</span><span class="qtype">옳은 것 선택형</span><span class="qpt">[4점, 각 1점]</span></div>
+    <div class="qbody">
+      <div class="qstem">생명 공학 기술에 대한 설명이다. 괄호 안에서 옳은 것을 고르시오.</div>
+      <div class="qcond">
+        <div class="qc-title">조 　 건</div>
+        <div class="qc-body">
+          <ul>
+            <li>( <span class="pick"><b>핵치환</b> / <b>조직 배양</b></span> )은 어떤 세포의 핵을 꺼내어 핵을 제거한 다른 세포에 이식하는 기술이다.</li>
+            <li>( <span class="pick"><b>세포 융합</b> / <b>유전자 재조합</b></span> )은 서로 다른 두 종류의 세포를 융합하여 잡종 세포를 만드는 기술이다.</li>
+            <li>조직 배양은 조직·세포를 떼어 ( <span class="pick"><b>인공 배지</b> / <b>대리모 자궁</b></span> )에서 증식시키는 기술이다.</li>
+            <li>유전자 재조합 기술에서 DNA 운반체로는 세균의 ( <span class="pick"><b>플라스미드</b> / <b>히스톤</b></span> )가 주로 사용된다.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">21</span><span class="qtype">서술형</span><span class="qpt">[4점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">핵치환 기술을 이용하여 복제 동물을 생산하는 과정을 <span class="uline">체세포의 핵</span>, <span class="uline">핵을 제거한 난자</span>, <span class="uline">대리모</span>를 포함하여 순서대로 서술하시오.</div>
+      <div class="write-lines"><div class="wl"></div><div class="wl"></div><div class="wl"></div></div>
+    </div>
+  </div>
+  <div class="pagenum">서답형 예상 문제 · 생명 공학 기술</div>
+</section>
+
+<!-- ============================ 문제 · PART 4 활용 ============================ -->
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--exam)">서답형 예상 문제</span><span>출제 범위 · 생명 공학 기술의 활용</span></div>
+
+  <div class="qgroup-head" style="margin-top:6mm;">Ⅳ. 인간 생활과 생명 공학 기술의 활용<span class="qg-area">Ⅵ. 생명 공학 기술과 인간 생활</span></div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">22</span><span class="qtype">단답형</span><span class="qpt">[3점]</span></div>
+    <div class="qbody"><div class="qstem"><span class="uline">B 림프구와 암세포를 세포 융합</span>하여 만든 잡종 세포로부터 얻은 한 종류의 항체를 무엇이라고 하는지 쓰시오.</div></div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">23</span><span class="qtype">서술형</span><span class="qpt">[4점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">유전자 치료란 무엇인지 <span class="uline">정상 유전자</span>와 <span class="uline">질병 치료</span>의 의미를 포함하여 서술하시오.</div>
+      <div class="write-lines"><div class="wl"></div><div class="wl"></div></div>
+    </div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">24</span><span class="qtype">옳은 것 선택형</span><span class="qpt">[6점, 각 1점]</span></div>
+    <div class="qbody">
+      <div class="qstem">줄기세포의 종류에 대한 설명이다. 괄호 안에서 옳은 것을 고르시오.</div>
+      <div class="qcond">
+        <div class="qc-title">조 　 건</div>
+        <div class="qc-body">
+          <ul>
+            <li>배아 줄기세포는 우리 몸을 구성하는 ( <span class="pick"><b>어떤 세포로든</b> / <b>일부 세포로만</b></span> ) 분화할 수 있다.</li>
+            <li>배아 줄기세포는 생명 윤리 문제가 ( <span class="pick"><b>발생한다</b> / <b>발생하지 않는다</b></span> ).</li>
+            <li>성체 줄기세포는 신체의 모든 세포와 조직으로 분화할 수 ( <span class="pick"><b>있다</b> / <b>없다</b></span> ).</li>
+            <li>유도 만능 줄기세포는 성체의 체세포를 ( <span class="pick"><b>역분화</b> / <b>핵치환</b></span> )시켜 얻는다.</li>
+            <li>유도 만능 줄기세포는 면역 거부 반응이 ( <span class="pick"><b>일어난다</b> / <b>일어나지 않는다</b></span> ).</li>
+            <li>유도 만능 줄기세포는 역분화 과정에서 ( <span class="pick"><b>유전자 변이</b> / <b>형질 전환</b></span> )가 일어날 수 있는 문제점이 있다.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">25</span><span class="qtype">단답형</span><span class="qpt">[3점]</span></div>
+    <div class="qbody"><div class="qstem">생명 공학 기술을 이용하여 만들어진 <span class="uline">새로운 조합의 유전 물질을 가진 생물</span>을 무엇이라고 하는지 그 영문 약자로 쓰시오.</div></div>
+  </div>
+  <div class="pagenum">서답형 예상 문제 · 기술의 활용</div>
+</section>
+
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--exam)">서답형 예상 문제</span><span>출제 범위 · 생명 공학 기술의 활용</span></div>
+
+  <div class="qbox" style="margin-top:6mm;">
+    <div class="qhead"><span class="qno">26</span><span class="qtype">조건 활용 서술형</span><span class="qpt">[8점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">유전자 변형 생물체(LMO)의 활용은 인간 생활에 긍정적 영향을 주지만 부정적 영향도 있다. LMO의 <span class="uline">긍정적 영향과 부정적 영향</span>을 아래 &lt;조건&gt;에 따라 각각 한 가지 이상씩 문장으로 서술하시오. (단, 문장으로 서술하지 않을 시 감점)</div>
+      <div class="qcond">
+        <div class="qc-title">조 　 건</div>
+        <div class="qc-body">
+          <ul>
+            <li>긍정적 영향: 식량 자원·의약품·환경 정화·신재생 에너지 중 한 가지 사례를 포함할 것.</li>
+            <li>부정적 영향: 생태학적·법적·사회적·윤리적 문제 중 한 가지를 포함할 것.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="write-lines"><div class="wl"></div><div class="wl"></div><div class="wl"></div></div>
+    </div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">27</span><span class="qtype">서술형</span><span class="qpt">[4점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">단일 클론 항체를 생산할 때 사용하는 <span class="uline">잡종 세포가 가지는 두 가지 특징</span>을 항체 생산과 분열·수명의 측면에서 서술하시오.</div>
+      <div class="write-lines"><div class="wl"></div><div class="wl"></div></div>
+    </div>
+  </div>
+
+  <div class="qbox">
+    <div class="qhead"><span class="qno">28</span><span class="qtype">서술형</span><span class="qpt">[4점, 부분 점수]</span></div>
+    <div class="qbody">
+      <div class="qstem">성체 줄기세포와 비교할 때 <span class="uline">유도 만능 줄기세포가 가지는 장점 두 가지</span>를 생명 윤리와 면역 반응의 측면에서 서술하시오.</div>
+      <div class="write-lines"><div class="wl"></div><div class="wl"></div></div>
+    </div>
+  </div>
+  <div class="pagenum">서답형 예상 문제 · 기술의 활용</div>
+</section>
+
+<!-- ============================ 정답 · 해설 ============================ -->
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--exam)">정답 및 해설 · ANSWER KEY</span><span>서답형 예상 문제</span></div>
+
+  <div class="ans-head" style="margin-top:6mm;">정답 및 해설</div>
+
+  <div class="ans-group">Ⅰ. 광합성</div>
+  <div class="ans-row"><span class="an">1</span><span class="av"><span class="lead">그라나</span></span></div>
+  <div class="ans-row"><span class="an">2</span><span class="av"><span class="lead">카로티노이드(계 색소)</span></span></div>
+  <div class="ans-row"><span class="an">3</span><span class="av">엽록소가 광합성에 필요한 빛에너지를 주로 흡수한다는 것을 알 수 있다. <span class="pts">(흡수 스펙트럼=파장별 빛 흡수율, 작용 스펙트럼=파장별 광합성 속도가 일치)</span></span></div>
+  <div class="ans-row"><span class="an">4</span><span class="av">명반응은 <b>틸라코이드 막</b>에서, 탄소 고정 반응은 <b>스트로마</b>에서 일어난다. 명반응에서 생성되어 사용되는 두 물질은 <b>ATP와 NADPH</b>이다.</span></div>
+  <div class="ans-row"><span class="an">5</span><span class="av">① 모두 관여한다　② 생성된다 / 생성된다　③ Ⅰ　④ ATP　⑤ 산소</span></div>
+  <div class="ans-row"><span class="an">6</span><span class="av">명반응의 빛에너지 흡수로 <b>스트로마의 H⁺이 틸라코이드 내부로 운반</b>되어 H⁺ 농도 기울기가 형성된다. 이 농도 기울기에 따라 H⁺이 <b>스트로마 쪽으로 확산(화학 삼투)</b>되면서 <b>ATP 합성 효소</b>를 통과할 때 ATP가 합성된다.</span></div>
+  <div class="ans-row"><span class="an">7</span><span class="av"><b>탄소 고정</b>: 3CO₂가 RuBP 3분자와 결합해 6탄소 화합물을 거쳐 3PG 6분자가 된다. <b>환원</b>: ATP·NADPH를 이용해 3PG가 PGAL로 환원된다. <b>RuBP 재생</b>: PGAL 6분자 중 1분자는 포도당 합성에 쓰이고, 5분자는 RuBP 3분자로 전환되어 회로를 반복한다.</span></div>
+  <div class="ans-row"><span class="an">8</span><span class="av"><b>공통점</b>: 광합성과 세포 호흡 모두 <b>화학 삼투</b>로 ATP를 합성한다. <b>차이점</b>: H⁺ 농도 기울기 형성이 광합성에서는 <b>빛에너지 흡수</b>로, 세포 호흡에서는 <b>포도당의 산화</b>로 이루어진다.</span></div>
+
+  <div class="ans-group">Ⅱ. 유전 물질</div>
+  <div class="ans-row"><span class="an">9</span><span class="av"><span class="lead">유전체</span></span></div>
+  <div class="ans-row"><span class="an">10</span><span class="av"><span class="lead">뉴클레오타이드</span></span></div>
+  <div class="ans-row"><span class="an">11</span><span class="av">원핵세포는 <b>원형 DNA</b>를 가지며 <b>핵막이 없어</b> 세포질에 퍼져 있고, 진핵세포는 <b>선형 DNA</b>를 가지며 <b>핵막에 둘러싸여</b> 있다.</span></div>
+  <div class="ans-row"><span class="an">12</span><span class="av">① 2개 / A·G　② T　③ C</span></div>
+  <div class="ans-row"><span class="an">13</span><span class="av">DNA 분해 효소로 처리했을 때만 형질 전환이 일어나지 않았으므로, <b>형질 전환을 일으키는 유전 물질은 DNA</b>임을 알 수 있다.</span></div>
+  <div class="pagenum">정답 및 해설</div>
+</section>
+
+<section class="page">
+  <div class="runhead"><span class="rh-tag" style="color:var(--exam)">정답 및 해설 · ANSWER KEY</span><span>서답형 예상 문제</span></div>
+
+  <div class="ans-row" style="margin-top:6mm;"><span class="an">14</span><span class="av"><b>폴리뉴클레오타이드 두 가닥</b>이 나선 모양으로 꼬인 <b>이중 나선</b> 구조이며, 두 가닥은 <b>당-인산 골격</b>을 바깥에 두고 안쪽 염기끼리 <b>상보적으로 결합</b>(A=T, G=C)하여 마주 본다.</span></div>
+  <div class="ans-row"><span class="an">15</span><span class="av"><span class="lead">DNA</span> <span class="pts">(³²P로 표지한 DNA가 대장균 내부로 들어감)</span></span></div>
+  <div class="ans-row"><span class="an">16</span><span class="av">폴리뉴클레오타이드는 <b>5′ → 3′ 방향성</b>을 나타내며, 이는 <b>당-인산 골격</b>을 따라 정해진다.</span></div>
+
+  <div class="ans-group">Ⅲ. 생명 공학 기술</div>
+  <div class="ans-row"><span class="an">17</span><span class="av"><span class="lead">제한 효소</span></span></div>
+  <div class="ans-row"><span class="an">18</span><span class="av"><span class="lead">플라스미드(DNA 운반체)</span></span></div>
+  <div class="ans-row"><span class="an">19</span><span class="av">같은 제한 효소로 잘라야 두 DNA 조각의 <b>잘린 단면(염기 서열)이 서로 상보적</b>이어서, 혼합했을 때 염기끼리 결합해 연결될 수 있기 때문이다.</span></div>
+  <div class="ans-row"><span class="an">20</span><span class="av">① 핵치환　② 세포 융합　③ 인공 배지　④ 플라스미드</span></div>
+  <div class="ans-row"><span class="an">21</span><span class="av"><b>체세포에서 핵을 꺼내</b> 핵을 제거한 난자에 이식(핵치환)하고, 세포 분열로 배아를 만든 뒤 이 배아를 <b>대리모의 자궁에 이식</b>하여 복제 동물을 얻는다.</span></div>
+
+  <div class="ans-group">Ⅳ. 인간 생활과 생명 공학 기술의 활용</div>
+  <div class="ans-row"><span class="an">22</span><span class="av"><span class="lead">단일 클론 항체</span></span></div>
+  <div class="ans-row"><span class="an">23</span><span class="av">유전적으로 결함이 있는 사람에게 <b>정상 유전자를 넣어</b> 이상 유전자를 대체하거나 정상 단백질이 합성되게 함으로써 <b>질병을 치료</b>하는 방법이다.</span></div>
+  <div class="ans-row"><span class="an">24</span><span class="av">① 어떤 세포로든　② 발생한다　③ 없다　④ 역분화　⑤ 일어나지 않는다　⑥ 유전자 변이</span></div>
+  <div class="ans-row"><span class="an">25</span><span class="av"><span class="lead">LMO</span></span></div>
+  <div class="ans-row"><span class="an">26</span><span class="av"><b>긍정적</b>: 병충해에 강한 옥수수·황금쌀 등 생산성 높은 식량 자원을 개발하거나, 인슐린 등 의약품을 생산하고, 중금속·기름을 분해해 환경을 정화하며, 바이오 에탄올 등 신재생 에너지를 생산할 수 있다. <b>부정적</b>: LMO 재배로 생태계가 교란되고 생물 다양성이 파괴될 수 있으며, 특허 독점으로 비용 부담·법적 분쟁이 생기거나 생명 경시 등 윤리적 문제가 발생할 수 있다.</span></div>
+  <div class="ans-row"><span class="an">27</span><span class="av">잡종 세포는 <b>항체를 생산</b>할 수 있을 뿐만 아니라, <b>인공 배지에서 분열할 수 있고 수명이 반영구적</b>이다.</span></div>
+  <div class="ans-row"><span class="an">28</span><span class="av">유도 만능 줄기세포는 체세포를 역분화시켜 얻으므로 <b>생명 윤리 문제로부터 자유롭고</b>, 환자 자신의 세포를 이용하므로 <b>면역 거부 반응이 일어나지 않는다.</b></span></div>
+
+  <div class="note-block" style="margin-top:22px;">
+    <span class="nb-label">마무리</span>
+    <span class="nb-body">모든 서술형은 <b>핵심 키워드 포함 여부</b>로 부분 점수가 매겨지는 경우가 많습니다. 위 해설의 <b>굵은 글씨 용어</b>가 채점 핵심어이니 반드시 포함하여 답안을 작성하세요.</span>
+  </div>
+  <div class="pagenum">정답 및 해설</div>
+</section>
+
+</body>
+</html>
